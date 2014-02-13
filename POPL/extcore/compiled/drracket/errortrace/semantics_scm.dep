@@ -1,0 +1,1 @@
+("5.3.6" ("7c773182df3d1484cc5d92ed57d5ce2ef6e48079" . "aabed1b1029f9e8697083bf8f824d94887ccf221") #"/usr/userfs/p/pi514/Documents/POPL/extcore/enviroments.scm" (collects #"eopl" #"main.rkt") #"/usr/userfs/p/pi514/Documents/POPL/extcore/data-structures.scm" #"/usr/userfs/p/pi514/Documents/POPL/extcore/syntax.scm" (collects #"eopl" #"lang" #"reader.rkt"))

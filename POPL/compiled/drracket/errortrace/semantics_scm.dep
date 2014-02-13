@@ -1,0 +1,1 @@
+("5.3.6" ("2611a414b7be28ab9d56cbead96637e9ce74f524" . "71b4e31af9dbade5c205ee1ed3157ad7bd0757e9") #"/usr/userfs/p/pi514/Documents/POPL/syntax.scm" (collects #"eopl" #"main.rkt") #"/usr/userfs/p/pi514/Documents/POPL/data-structures.scm" (collects #"eopl" #"lang" #"reader.rkt"))
