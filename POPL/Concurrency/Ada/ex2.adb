@@ -33,11 +33,11 @@ procedure ex2 is
     end Consumer;
 
     task body Consumer is
-        Took : Integer := 0;
+        Took : Integer;
     begin
         Store.Take(Took);
-        put("Consumer took: ");
-        put(Took);
+        -- put("Consumer took: ");
+        -- put(Took);
     end Consumer;
 
     task type Producer is
@@ -52,6 +52,7 @@ begin -- ex2
 
     declare
         C1, C2 : Consumer;
+        P1 : Producer;
     begin
         null;
     end;
