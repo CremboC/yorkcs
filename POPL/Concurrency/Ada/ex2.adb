@@ -22,7 +22,7 @@ procedure ex2 is
     --     if there is more than 1 items in the store
     protected type Store is
         entry Insert;
-        entry Take(V : out Integer);
+        entry Take(V : out Integer; Num : in Integer);
     private
         Thing : Integer := 0;
     end Store;
@@ -39,14 +39,16 @@ procedure ex2 is
             put_line("");
         end Insert;
 
-        entry Take(V : out Integer) when Thing > 0 is
+        entry Take(V : out Integer; Num : in Integer) when Thing > 0 is
         begin
             -- on take, decrease by one and return it as the item taken
             V := Thing;
             Thing := Thing - 1;
 
             -- declare consumer took something
-            put("Consumer took: ");
+            put("Consumer ");
+            put(Num);
+            put(" \took: ");
             put(V);
             put_line("");
         end Take;
@@ -56,14 +58,14 @@ procedure ex2 is
 
     -- the consumer!
     -- takes stuff from the store and prints out what it took
-    task type Consumer is
+    task type Consumer(Num : Integer) is
     end Consumer;
 
     task body Consumer is
         Took : Integer;
     begin
         for Counter in 1 .. times loop
-            S.Take(Took);
+            S.Take(Took, Num);
         end loop;
     end Consumer;
 
@@ -79,7 +81,11 @@ procedure ex2 is
         end loop;
     end Producer;
 
-    C1, C2 : Consumer;
+    C1 : Consumer(1);
+    C2 : Consumer(2);
+    C3 : Consumer(3);
+    C4 : Consumer(4);
+
     P1 : Producer;
 
 begin -- ex2
