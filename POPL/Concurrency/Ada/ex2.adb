@@ -5,56 +5,78 @@
 -- Hint: you will need to use the 'count attribute.
 
 with Ada.integer_text_IO;
-use Ada.integer_text_IO;
+    use Ada.integer_text_IO;
+
+with Text_IO;
+    use Text_IO;
 
 procedure ex2 is
 
+    -- the store!
+    -- producers insert products into this store
+    --     if less than 10 items in store
+    -- consumers take from this store
+    --     if there is more than 1 items in the store
     protected type Store is
-        procedure Insert;
+        entry Insert;
         entry Take(V : out Integer);
     private
-        Thing : Integer;
+        Thing : Integer := 0;
     end Store;
 
     protected body Store is
-        procedure Insert is
+        entry Insert when Thing < 10 is
         begin
+            -- on insert just increase number of things by one
             Thing := Thing + 1;
+
+            -- declare producer has inserted something
+            put_line("Producer Inserted");
         end Insert;
 
         entry Take(V : out Integer) when Thing > 0 is
         begin
+            -- on take, decrease by one and return it as the item taken
             V := Thing;
             Thing := Thing - 1;
+
+            -- declare consumer took something
+            put("Consumer took: ");
+            put(V);
+            put_line("");
         end Take;
     end Store;
 
+    S : Store;
+
+    -- the consumer!
+    -- takes stuff from the store and prints out what it took
     task type Consumer is
     end Consumer;
 
     task body Consumer is
         Took : Integer;
     begin
-        Store.Take(Took);
-        -- put("Consumer took: ");
-        -- put(Took);
+        for Counter in 1 .. 500 loop
+            S.Take(Took);
+        end loop;
     end Consumer;
 
+    -- the producer!
+    -- inserts 'items' into the store, announces so once it has done it
     task type Producer is
     end Producer;
 
     task body Producer is
     begin
-        Store.Insert;
+        for Counter in 1 .. 500 loop
+            S.Insert;
+        end loop;
     end Producer;
 
+    C1, C2 : Consumer;
+    P1 : Producer;
+
 begin -- ex2
-
-    declare
-        C1, C2 : Consumer;
-        P1 : Producer;
-    begin
-        null;
-    end;
-
+    null;
 end ex2;
