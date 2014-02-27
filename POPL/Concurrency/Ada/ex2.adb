@@ -12,6 +12,9 @@ with Text_IO;
 
 procedure ex2 is
 
+    -- how many times the producer and consumer loop
+    times : Integer := 50;
+
     -- the store!
     -- producers insert products into this store
     --     if less than 10 items in store
@@ -31,7 +34,9 @@ procedure ex2 is
             Thing := Thing + 1;
 
             -- declare producer has inserted something
-            put_line("Producer Inserted");
+            put("Produced; Items: ");
+            put(Thing);
+            put_line("");
         end Insert;
 
         entry Take(V : out Integer) when Thing > 0 is
@@ -57,7 +62,7 @@ procedure ex2 is
     task body Consumer is
         Took : Integer;
     begin
-        for Counter in 1 .. 500 loop
+        for Counter in 1 .. times loop
             S.Take(Took);
         end loop;
     end Consumer;
@@ -69,7 +74,7 @@ procedure ex2 is
 
     task body Producer is
     begin
-        for Counter in 1 .. 500 loop
+        for Counter in 1 .. times loop
             S.Insert;
         end loop;
     end Producer;
