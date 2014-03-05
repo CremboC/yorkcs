@@ -24,7 +24,7 @@ procedure ex3 is
     end Bounded_Buffer;
 
     task body Bounded_Buffer is
-        Size : constant Integer := 32;
+        Size : constant Integer := 5;
         type Index is mod Size;
         Buffer : array(Index) of Integer;
         B, C : Index := 0;
@@ -60,28 +60,33 @@ procedure ex3 is
     end Bounded_Buffer;
 
     -- writes into the bounded buffer
-    task type Writer(Num : Integer) is
+    task type Writer is
     end Writer;
 
     task body Writer is
         Took : Integer;
     begin
         for Counter in 1 .. times loop
-            Bounded_Buffer.Insert(Took, Num);
+            Bounded_Buffer.Insert(Took);
         end loop;
     end Writer;
 
     -- reader! reads from the bounded buffer
-    task type Reader(Num : Integer) is
+    task type Reader is
     end Reader;
 
     task body Reader is
         Took : Integer;
     begin
         for Counter in 1 .. times loop
-            Bounded_Buffer.(Took, Num);
+            Bounded_Buffer.Get(Took);
         end loop;
     end Reader;
+
+    W : Writer;
+    R : Reader;
+    -- W1, W2, W3, W4, W5, W6, W7, W8, W9, W10 : Writer;
+    -- R1, R2, R3, R4, R5, R6, R7, R8, R9, R10 : Reader;
 
 
 begin -- ex3

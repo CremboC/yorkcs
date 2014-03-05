@@ -1,2 +1,3 @@
 all:
-    gnatmake ex1.adb
+	gnatmake ex3.adb
+	./ex3
