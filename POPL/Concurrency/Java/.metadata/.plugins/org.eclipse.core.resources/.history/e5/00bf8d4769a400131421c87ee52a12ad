@@ -1,0 +1,41 @@
+
+public class ExerciseTwo {
+	
+	private class Writer extends Thread {
+		
+		private int[] integers;
+
+		public Writer(int[] integers) {
+			this.integers = integers;
+}
+
+		public void run() {
+			
+		}
+		
+	}
+	
+	private int[] integers;
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Writer w1 = new Writer();
+		Writer w2 = new Writer();
+
+		w1.start();
+		w2.start();
+
+		try {
+			t1.join();
+			t2.join();
+		} catch (InterruptedException ie) {
+
+		}
+
+		System.out.println("x = " + p.x + " ; y = " + p.y);
+	}
+
+}
