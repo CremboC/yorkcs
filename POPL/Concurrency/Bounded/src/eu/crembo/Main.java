@@ -56,7 +56,7 @@ public class Main {
 			{
 				mutex.down();
 
-				last = (last + 1) % size ; // % is modulus
+				last = (last + 1) % size;
 				items[last] = i;
 				System.out.println("Produced. Slot: " + last);
 
@@ -71,7 +71,7 @@ public class Main {
 			{
 				mutex.down();
 
-				first = (first + 1) % size ; // % is modulus
+				first = (first + 1) % size;
 				System.out.println("Consumed. Number: " + items[first] + " Slot: " + first);
 
 				mutex.up();
