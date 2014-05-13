@@ -1,8 +1,10 @@
 package eu.crembo;
 
+import java.util.ArrayList;
+
 /**
  * Bounded buffer problem.
- *
+ * <p/>
  * 2 Consumers and 2 Producers.
  * Producers puts items into buffer - make sure it doesn't put into full buffer.
  * Consumer uses items from buffer - make sure it doesn't take from empty buffer.
@@ -10,8 +12,48 @@ package eu.crembo;
 public class Main {
 
 	public static final int LIMIT = 50000;
+	public static final int CONSUMER_NUM = 2;
+	public static final int PRODUCER_NUM = 2;
 
 	public static BoundedBuffer b;
+
+	public static int first = 0, last = 0, size = 2;
+	public static int[] items = new int[size];
+
+	static Semaphore mutex = new Semaphore();
+	static Semaphore emptyCount = new Semaphore(size, size);
+	static Semaphore fillCount = new Semaphore(size, 0);
+
+	public static void main(String[] args) {
+		b = new BoundedBuffer();
+
+		Producer[] ps = new Producer[PRODUCER_NUM];
+		Consumer[] cs = new Consumer[CONSUMER_NUM];
+
+		for (int i = 0; i < CONSUMER_NUM; i++) {
+			cs[i] = new Consumer();
+			cs[i].start();
+		}
+
+		for (int i = 0; i < PRODUCER_NUM; i++) {
+			ps[i] = new Producer();
+			ps[i].start();
+		}
+
+		try {
+			for (int i = 0; i < PRODUCER_NUM; i++) {
+				ps[i].join();
+			}
+
+			for (int i = 0; i < CONSUMER_NUM; i++) {
+				cs[i].join();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("Done");
+	}
 
 	public static class Semaphore {
 		private int s = 0, max;
@@ -41,17 +83,10 @@ public class Main {
 		}
 	}
 
-	public static int first = 0, last = 0, size = 2;
-
-	static Semaphore mutex = new Semaphore();
-	static Semaphore emptyCount = new Semaphore(size, size);
-	static Semaphore fillCount = new Semaphore(size, 0);
-
-	public static int[] items = new int[size];
-
 	public static class BoundedBuffer {
 
 		public void put(int i) throws InterruptedException {
+
 			emptyCount.down();
 			{
 				mutex.down();
@@ -111,38 +146,4 @@ public class Main {
 
 		}
 	}
-
-	public static final int CONSUMER_NUM = 2;
-	public static final int PRODUCER_NUM = 2;
-
-    public static void main(String[] args) {
-	    b = new BoundedBuffer();
-
-		Producer[] ps = new Producer[PRODUCER_NUM];
-	    Consumer[] cs = new Consumer[CONSUMER_NUM];
-
-	    for (int i = 0; i < CONSUMER_NUM; i++) {
-		    cs[i] = new Consumer();
-		    cs[i].start();
-	    }
-
-	    for (int i = 0; i < PRODUCER_NUM; i++) {
-		    ps[i] = new Producer();
-		    ps[i].start();
-	    }
-
-	    try {
-		    for (int i = 0; i < PRODUCER_NUM; i++) {
-			    ps[i].join();
-		    }
-
-		    for (int i = 0; i < CONSUMER_NUM; i++) {
-			    cs[i].join();
-		    }
-	    } catch (InterruptedException e) {
-			e.printStackTrace();
-	    }
-
-	    System.out.println("Done");
-    }
 }
