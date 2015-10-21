@@ -1,0 +1,128 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="practical2" class="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="6.0.2">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={-8, -8, 1696, 1026}, maximized=true}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[1473, 910]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{736.5, 455.0}">
+    </property>
+    <property name="DE Director" class="ptolemy.domains.de.kernel.DEDirector">
+        <property name="stopTime" class="ptolemy.data.expr.Parameter" value="2000">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{80, 45}">
+        </property>
+    </property>
+    <entity name="R" class="ptolemy.actor.lib.Clock">
+        <property name="period" class="ptolemy.data.expr.Parameter" value="200">
+        </property>
+        <property name="offsets" class="ptolemy.data.expr.Parameter" value="{0.0}">
+        </property>
+        <property name="values" class="ptolemy.data.expr.Parameter" value="{30}">
+        </property>
+        <doc>Create a set of pulses</doc>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{80, 140}">
+        </property>
+    </entity>
+    <entity name="S" class="ptolemy.actor.lib.Clock">
+        <property name="period" class="ptolemy.data.expr.Parameter" value="200">
+        </property>
+        <property name="offsets" class="ptolemy.data.expr.Parameter" value="{100}">
+        </property>
+        <property name="values" class="ptolemy.data.expr.Parameter" value="{20}">
+        </property>
+        <doc>Create a set of pulses</doc>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[80.0, 205.0]">
+        </property>
+    </entity>
+    <entity name="T" class="ptolemy.actor.lib.Clock">
+        <property name="period" class="ptolemy.data.expr.Parameter" value="300">
+        </property>
+        <property name="offsets" class="ptolemy.data.expr.Parameter" value="{30}">
+        </property>
+        <property name="values" class="ptolemy.data.expr.Parameter" value="{140}">
+        </property>
+        <doc>Create a set of pulses</doc>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[80.0, 270.0]">
+        </property>
+    </entity>
+    <entity name="RecordAssembler" class="ptolemy.actor.lib.RecordAssembler">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[380.0, 185.0]">
+        </property>
+        <port name="comptime" class="ptolemy.actor.TypedIOPort">
+            <property name="input"/>
+        </port>
+    </entity>
+    <entity name="processed" class="ptolemy.actor.lib.gui.Display">
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={671, 403, 342, 245}, maximized=false}">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[585.0, 385.0]">
+        </property>
+    </entity>
+    <entity name="ProcModel" class="crembo.ProcModel">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="308.5, 446.0">
+        </property>
+    </entity>
+    <entity name="discarded" class="ptolemy.actor.lib.gui.Display">
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={1023, 400, 342, 245}, maximized=false}">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[580.0, 445.0]">
+        </property>
+    </entity>
+    <entity name="TimedPlotter" class="ptolemy.actor.lib.gui.TimedPlotter">
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={810, 550, 516, 359}, maximized=false}">
+        </property>
+        <property name="_plotSize" class="ptolemy.actor.gui.SizeAttribute" value="[500, 300]">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[510.0, 690.0]">
+        </property>
+        <configure>
+<?plotml <!DOCTYPE plot PUBLIC "-//UC Berkeley//DTD PlotML 1//EN"
+"http://ptolemy.eecs.berkeley.edu/xml/dtd/PlotML_1.dtd">
+<plot>
+<title>TimedPlotter</title>
+<xRange min="0.0" max="2000.0"/>
+<yRange min="0.0" max="100.0"/>
+</plot>?>
+        </configure>
+    </entity>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+        <vertex name="vertex1" value="[165.0, 205.0]">
+        </vertex>
+    </relation>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <relation name="relation7" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <link port="R.output" relation="relation4"/>
+    <link port="S.output" relation="relation4"/>
+    <link port="T.output" relation="relation4"/>
+    <link port="RecordAssembler.output" relation="relation7"/>
+    <link port="RecordAssembler.comptime" relation="relation4"/>
+    <link port="processed.input" relation="relation5"/>
+    <link port="ProcModel.input" relation="relation7"/>
+    <link port="ProcModel.output" relation="relation5"/>
+    <link port="ProcModel.discard" relation="relation6"/>
+    <link port="ProcModel.util" relation="relation"/>
+    <link port="discarded.input" relation="relation6"/>
+    <link port="TimedPlotter.input" relation="relation"/>
+</entity>

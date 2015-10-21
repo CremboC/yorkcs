@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/apps/Ptolemy/ptII6.0.2/ptolemy/ptsupport.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://C:/apps/Ptolemy/ptII6.0.2/ptolemy" />
+          <root url="jar://C:/apps/Ptolemy/ptII6.0.2/ptolemy/vergil/vergil.jar!/" />
+          <root url="jar://C:/apps/Ptolemy/ptII6.0.2/ptolemy/domains/domains.jar!/" />
+          <root url="jar://C:/apps/Ptolemy/ptII6.0.2/ptolemy/domains/experimentalDomains.jar!/" />
+          <root url="jar://C:/apps/Ptolemy/ptII6.0.2/ptolemy/domains/wireless/wireless.jar!/" />
+          <root url="jar://C:/apps/Ptolemy/ptII6.0.2/lib/diva.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/apps/Ptolemy/ptII6.0.2" />
+          <root url="jar://C:/apps/Ptolemy/ptII6.0.2/ptolemy/domains/experimentalDomains.jar!/" />
+        </SOURCES>
+        <jarDirectory url="file://C:/apps/Ptolemy/ptII6.0.2/ptolemy" recursive="false" />
+      </library>
+    </orderEntry>
+  </component>
+</module>
